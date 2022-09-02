@@ -7,6 +7,7 @@ import { UsersService } from '../../modules/users/users.service';
 import { TestingModule } from '@nestjs/testing';
 import { apply_middleware } from '../apply_middleware';
 import { UserSigninCredentialsDto } from 'src/modules/auth/dto/user_signin_credentials.dto';
+import { UpdateUserDto } from 'src/modules/users/dto/update_user.dto';
 
 @Injectable()
 export class TestHelperService {
@@ -31,6 +32,18 @@ export class TestHelperService {
             email: `${unique_string}@a.com`,
             name: `${unique_string}`,
             password: `1aA${unique_string}`,
+        };
+    }
+
+    get_unique_update_user_dto (): UpdateUserDto {
+        this.unique_id.user += 1;
+        const unique_string = `${this.unique_name}${this.unique_id.user}`;
+        return {
+            email: `${unique_string}@a.com`,
+            name: `${unique_string}`,
+            about: `${unique_string}`,
+            address: `${unique_string}`,
+            phone: `${unique_string}`,
         };
     }
 

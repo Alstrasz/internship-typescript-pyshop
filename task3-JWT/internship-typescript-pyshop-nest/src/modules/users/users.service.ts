@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateUserDto } from './dto/update_user.dto';
 import { CreateUserInterface } from './interfaces/create_user_interface';
 
 @Injectable()
@@ -37,9 +38,20 @@ export class UsersService {
             } );
     }
 
-    // async update_user ( id: string, update_user_dto: UpdateUserDto ): Promise<User> {
-
-    // }
+    async update_user ( id: string, update_user_dto: UpdateUserDto ): Promise<User> {
+        return this.prisma_service.user.update( {
+            where: {
+                id,
+            },
+            data: update_user_dto,
+        } )
+            .catch( ( err ) => {
+                if ( err instanceof Prisma.PrismaClientKnownRequestError ) {
+                    this.prisma_service.default_exception_handler( err, { conflict: true } );
+                }
+                throw err;
+            } );
+    }
 
     async delete_user ( id: string ) {
         await this.prisma_service.user.delete( {
