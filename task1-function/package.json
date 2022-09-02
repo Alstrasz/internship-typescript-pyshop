@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "npm run build && npm run run",
+    "build": "npx tsc",
+    "run": "node ./dist/main.js"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "eslint": "^8.23.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^4.8.2"
+  }
+}
