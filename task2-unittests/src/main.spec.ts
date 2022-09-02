@@ -111,6 +111,7 @@ export const getScore = ( gameStamps: Stamp[], offset: number ): Score => {
 
 // console.log( getScore( generateStamps(), 100 ) );
 
+// !!! WARNING: Code above probably should have been imported, but for the sake of it being standalone file, imports replaced with copy of the code
 
 describe( 'AppController', () => {
     describe( 'run on random stamps', () => {

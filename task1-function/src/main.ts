@@ -1,3 +1,9 @@
+// Assumptions:
+// - getScore will be called on properly generated stamps. This would mean offset is monotonicly increasing so we could use binsearch for faster execution
+// - Is there is no exact offser in stamps, previos closest should be taken. In case of stamps with offsets = [ 2, 4, 5, 7, 8 ] and we are looking for offset = 6, stamp with offset=5 would be taken
+// - If there no offset with value less or equal then we need, zero score should be returned { offset: 0, score: 0 }
+// - If target offset bigger than any offset in stamps, last stamp should be returned
+
 const TIMESTAMPS_COUNT = 50000;
 
 const PROBABILITY_SCORE_CHANGED = 0.0001;
@@ -67,7 +73,7 @@ export const getScore = ( gameStamps: Stamp[], offset: number ): Score => {
      *
      * @param {number} l left border of the range
      * @param {number} r right border of the range
-     * @param {( m: number ) => boolean} check function called on elements of the range. Should be monotonic ( each element to the left lower or equeal to current lement.
+     * @param {( m: number ) => boolean} check function called on elements of the range. Should be monotonicly increasing ( each element to the left lower or equeal to current lement.
      * In case of bool it would be check(l)=false..check(k)=false check(k+1)=true..check(r)=true, where k in range [l, r] ).
      * @return {number}
      */

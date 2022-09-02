@@ -27,7 +27,7 @@ export class AuthController {
         return new AccessTokenDto( this.auth_service.login( user ) );
     }
 
-    @ApiOperation( { summary: 'Creates user by username/password pair and issues jwt token' } )
+    @ApiOperation( { summary: 'Creates user by email/password pair and issues jwt token' } )
     @Post( 'signin' )
     @ApiCreatedResponse( { type: AccessTokenDto } )
     @ApiConflictResponse( { type: ConflictExceptionDto } )
