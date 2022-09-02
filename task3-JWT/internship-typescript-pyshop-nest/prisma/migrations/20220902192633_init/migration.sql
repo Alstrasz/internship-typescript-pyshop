@@ -6,7 +6,8 @@ CREATE TABLE "users" (
     "salt" VARCHAR(16) NOT NULL,
     "name" VARCHAR(40) NOT NULL,
     "address" VARCHAR(128) NOT NULL,
-    "phone" VARCHAR(128) NOT NULL,
+    "phone" VARCHAR(16) NOT NULL,
+    "about" VARCHAR(256) NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );

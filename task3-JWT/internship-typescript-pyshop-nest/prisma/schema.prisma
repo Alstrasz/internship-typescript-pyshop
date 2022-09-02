@@ -17,8 +17,9 @@ model User {
   password String @db.VarChar(128)
   salt     String @db.VarChar(16)
   name     String @db.VarChar(40)
-  address  String @db.VarChar(128)
-  phone    String @db.VarChar(128)
+  address  String @default("") @db.VarChar(128)
+  phone    String @default("") @db.VarChar(16)
+  about    String @default("") @db.VarChar(256)
 
   @@map("users")
 }

@@ -6,6 +6,7 @@ import { TestHelperModuleOptions } from './interfaces/test_helper_module_options
 import { UsersService } from '../../modules/users/users.service';
 import { TestingModule } from '@nestjs/testing';
 import { apply_middleware } from '../apply_middleware';
+import { UserSigninCredentialsDto } from 'src/modules/auth/dto/user_signin_credentials.dto';
 
 @Injectable()
 export class TestHelperService {
@@ -23,21 +24,21 @@ export class TestHelperService {
         this.unique_name = options?.test_bed_name || 'undefined';
     }
 
-    // get_unique_user_signin_credentials_dto (): UserSigninCredentialsDto {
-    //     this.unique_id.user += 1;
-    //     const unique_string = `${this.unique_name}${this.unique_id.user}`;
-    //     return {
-    //         email: `${unique_string}@a.com`,
-    //         nickname: `${unique_string}`,
-    //         password: `1aA${unique_string}`,
-    //     };
-    // }
+    get_unique_user_signin_credentials_dto (): UserSigninCredentialsDto {
+        this.unique_id.user += 1;
+        const unique_string = `${this.unique_name}${this.unique_id.user}`;
+        return {
+            email: `${unique_string}@a.com`,
+            name: `${unique_string}`,
+            password: `1aA${unique_string}`,
+        };
+    }
 
-    // async sign_in_unique_user () {
-    //     const user_signin_credentials_dto = this.get_unique_user_signin_credentials_dto();
-    //     const token = await this.auth_service.signin( user_signin_credentials_dto );
-    //     return { user_signin_credentials_dto, token };
-    // }
+    async sign_in_unique_user () {
+        const user_signin_credentials_dto = this.get_unique_user_signin_credentials_dto();
+        const token = await this.auth_service.signin( user_signin_credentials_dto );
+        return { user_signin_credentials_dto, token };
+    }
 
     async create_application ( module: TestingModule ): Promise<INestApplication> {
         const app = module.createNestApplication();
