@@ -23,16 +23,19 @@
 import router from '@/router'
 import axios from 'axios'
 import { useQuasar } from 'quasar'
-import { user, token } from '../stores/AuthStore'
+import { user, token, loading } from '../stores/AuthStore'
 
 function signout () {
+    loading.value = true
     axios( {
         method: 'POST',
         url: '/logout'
-    } ).then( () => {
-        token.remove_token()
-        router.push( '/' )
     } )
+        .then( () => {
+            token.remove_token()
+            router.push( '/' )
+        } )
+        .finally( () => { loading.value = false } )
 }
 
 const $q = useQuasar()

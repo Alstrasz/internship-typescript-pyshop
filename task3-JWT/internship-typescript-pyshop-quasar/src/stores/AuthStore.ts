@@ -1,6 +1,6 @@
 import { UserDto } from '@/interfaces/dto/user.dto'
 import axios from 'axios'
-import { reactive, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 
 const default_user: UserDto = {
     id: '',
@@ -10,6 +10,8 @@ const default_user: UserDto = {
     address: '',
     phone: ''
 }
+
+export const loading = ref( false )
 
 export const user = reactive( {
     data: default_user,
@@ -23,14 +25,17 @@ export const user = reactive( {
         this.data = default_user
     },
     request_user () {
+        loading.value = true
         axios( {
             method: 'GET',
             url: '/user'
-        } ).then( ( res ) => {
-            const data: UserDto = res.data
-            console.log( data )
-            this.update_user( data )
         } )
+            .then( ( res ) => {
+                const data: UserDto = res.data
+                console.log( data )
+                this.update_user( data )
+            } )
+            .finally( () => { loading.value = false } )
     }
 } )
 

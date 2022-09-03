@@ -55,7 +55,7 @@
 <script setup lang='ts'>
 import { AccessTokenDto } from '@/interfaces/dto/access_token.dto'
 import router from '@/router'
-import { token } from '@/stores/AuthStore'
+import { loading, token } from '@/stores/AuthStore'
 import axios from 'axios'
 import { useQuasar } from 'quasar'
 import isEmail from 'validator/lib/isEmail'
@@ -71,6 +71,7 @@ const signup_credentials: UserSignupCredentialsDto = reactive( {
 const $q = useQuasar()
 
 function onSubmit () {
+    loading.value = true
     axios( {
         method: 'POST',
         url: '/signup',
@@ -97,5 +98,6 @@ function onSubmit () {
                 } )
             }
         } )
+        .finally( () => { loading.value = false } )
 }
 </script>

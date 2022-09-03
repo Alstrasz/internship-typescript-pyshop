@@ -44,7 +44,7 @@ import isEmail from 'validator/lib/isEmail'
 import { UserSigninCredentialsDto } from '@/interfaces/dto/user_signin_credentials.dto'
 import axios from 'axios'
 import { AccessTokenDto } from '@/interfaces/dto/access_token.dto'
-import { token } from '@/stores/AuthStore'
+import { loading, token } from '@/stores/AuthStore'
 import router from '@/router'
 import { useQuasar } from 'quasar'
 
@@ -56,6 +56,7 @@ const signin_credentials: UserSigninCredentialsDto = reactive( {
 const $q = useQuasar()
 
 function onSubmit () {
+    loading.value = true
     axios( {
         method: 'POST',
         url: '/login',
@@ -81,5 +82,6 @@ function onSubmit () {
                 } )
             }
         } )
+        .finally( () => { loading.value = false } )
 }
 </script>

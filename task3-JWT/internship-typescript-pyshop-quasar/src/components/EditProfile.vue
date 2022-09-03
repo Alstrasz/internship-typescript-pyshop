@@ -98,7 +98,7 @@
 import { reactive, ref, watchEffect } from 'vue'
 import isEmail from 'validator/lib/isEmail'
 import { UpdateUserDto } from '@/interfaces/dto/update_user.dto'
-import { token, user } from '@/stores/AuthStore'
+import { loading, token, user } from '@/stores/AuthStore'
 import axios from 'axios'
 import { UserDto } from '@/interfaces/dto/user.dto'
 import { useQuasar } from 'quasar'
@@ -129,40 +129,46 @@ watchEffect( () => {
 const $q = useQuasar()
 
 function onSubmit () {
+    loading.value = true
     axios( {
         method: 'PUT',
         url: '/user',
         data: update_user_dto
-    } ).then( ( res ) => {
-        const data: UserDto = res.data
-        user.update_user( data )
-        $q.notify( {
-            message: 'Updated successfuly',
-            color: 'positive',
-            actions: [
-                { label: 'Dismiss', color: 'white', handler: () => { /* ... */ } }
-            ]
-        } )
-        router.push( '/' )
     } )
+        .then( ( res ) => {
+            const data: UserDto = res.data
+            user.update_user( data )
+            $q.notify( {
+                message: 'Updated successfuly',
+                color: 'positive',
+                actions: [
+                    { label: 'Dismiss', color: 'white', handler: () => { /* ... */ } }
+                ]
+            } )
+            router.push( '/' )
+        } )
+        .finally( () => { loading.value = false } )
 }
 
 function delete_profile () {
+    loading.value = true
     axios( {
         method: 'DELETE',
         url: '/user',
         data: update_user_dto
-    } ).then( () => {
-        $q.notify( {
-            message: 'Deleted successfuly',
-            color: 'positive',
-            actions: [
-                { label: 'Dismiss', color: 'white', handler: () => { /* ... */ } }
-            ]
-        } )
-        confirm_deletion_dialog.value = false
-        token.remove_token()
-        router.push( '/' )
     } )
+        .then( () => {
+            $q.notify( {
+                message: 'Deleted successfuly',
+                color: 'positive',
+                actions: [
+                    { label: 'Dismiss', color: 'white', handler: () => { /* ... */ } }
+                ]
+            } )
+            confirm_deletion_dialog.value = false
+            token.remove_token()
+            router.push( '/' )
+        } )
+        .finally( () => { loading.value = false } )
 }
 </script>

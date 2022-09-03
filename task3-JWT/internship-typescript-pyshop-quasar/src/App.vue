@@ -12,6 +12,13 @@
                 />
 
                 <q-toolbar-title> PyShopJL - TypeScript </q-toolbar-title>
+                <q-toolbar-title v-if="loading">
+                    <q-spinner
+                        color="accent"
+                        size="1.5em"
+                        :thickness="2"
+                    />
+                </q-toolbar-title>
 
                 <div><AuthRouter /></div>
             </q-toolbar>
@@ -48,7 +55,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import AuthRouter from './components/AuthRouter.vue'
-import { token } from './stores/AuthStore'
+import { token, loading } from './stores/AuthStore'
 
 const leftDrawerOpen = ref( true )
 </script>
