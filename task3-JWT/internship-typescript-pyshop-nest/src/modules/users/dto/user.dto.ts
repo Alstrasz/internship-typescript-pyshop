@@ -4,7 +4,11 @@ import { Exclude, Expose } from 'class-transformer';
 import * as _ from 'lodash';
 
 @Exclude()
-export class UserDto implements Omit<User, 'password' | 'salt' | 'id'> {
+export class UserDto implements Omit<User, 'password' | 'salt'> {
+    @ApiProperty()
+    @Expose()
+        id: string;
+
     @ApiProperty()
     @Expose()
         email: string;
