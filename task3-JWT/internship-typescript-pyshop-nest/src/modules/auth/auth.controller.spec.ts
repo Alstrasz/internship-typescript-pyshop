@@ -8,14 +8,14 @@ import { INestApplication } from '@nestjs/common';
 import { AccessTokenDto } from './dto/access_token.dto';
 import { AuthService } from './auth.service';
 import { UserLoginCredentialsDto } from './dto/user_login_credentials.dto';
-import { UserSigninCredentialsDto } from './dto/user_signin_credentials.dto';
+import { UserSignupCredentialsDto } from './dto/user_signup_credentials.dto';
 
 describe( 'AuthController', () => {
     let app: INestApplication;
     let controller: AuthController;
     let service: AuthService;
     let user: {
-        user_signin_credentials_dto: UserSigninCredentialsDto;
+        user_signup_credentials_dto: UserSignupCredentialsDto;
         token: string;
     };
 
@@ -43,11 +43,11 @@ describe( 'AuthController', () => {
         expect( controller ).toBeDefined();
     } );
 
-    it( 'should signin properly', async () => {
-        const credentials = test_helper_service.get_unique_user_signin_credentials_dto();
+    it( 'should signup properly', async () => {
+        const credentials = test_helper_service.get_unique_user_signup_credentials_dto();
 
         return request( app.getHttpServer() )
-            .post( '/signin' )
+            .post( '/signup' )
             .send( credentials )
             .expect( 201 )
             .expect( ( res ) => {
@@ -57,37 +57,37 @@ describe( 'AuthController', () => {
     } );
 
     it( 'should enforce password limitations', async () => {
-        const credentials = test_helper_service.get_unique_user_signin_credentials_dto();
+        const credentials = test_helper_service.get_unique_user_signup_credentials_dto();
 
         credentials.password = undefined;
         await request( app.getHttpServer() )
-            .post( '/signin' )
+            .post( '/signup' )
             .send( credentials )
             .expect( 400 );
 
         credentials.password = '1234567';
         await request( app.getHttpServer() )
-            .post( '/signin' )
+            .post( '/signup' )
             .send( credentials )
             .expect( 400 );
 
         credentials.password = 'aA1234567890123456789012345678901234567890';
         await request( app.getHttpServer() )
-            .post( '/signin' )
+            .post( '/signup' )
             .send( credentials )
             .expect( 400 );
 
         credentials.password = '12345678';
         return request( app.getHttpServer() )
-            .post( '/signin' )
+            .post( '/signup' )
             .send( credentials )
             .expect( 201 );
     } );
 
     it( 'should login properly', async () => {
         const login_credentials: UserLoginCredentialsDto = {
-            email: user.user_signin_credentials_dto.email,
-            password: user.user_signin_credentials_dto.password,
+            email: user.user_signup_credentials_dto.email,
+            password: user.user_signup_credentials_dto.password,
         };
 
         return request( app.getHttpServer() )
@@ -101,8 +101,8 @@ describe( 'AuthController', () => {
 
     it( 'should not login with wrong credentials', async () => {
         let login_credentials: UserLoginCredentialsDto = {
-            email: user.user_signin_credentials_dto.email + '1',
-            password: user.user_signin_credentials_dto.password,
+            email: user.user_signup_credentials_dto.email + '1',
+            password: user.user_signup_credentials_dto.password,
         };
 
         await request( app.getHttpServer() )
@@ -111,8 +111,8 @@ describe( 'AuthController', () => {
             .expect( 401 );
 
         login_credentials = {
-            email: user.user_signin_credentials_dto.email,
-            password: user.user_signin_credentials_dto.password + '1',
+            email: user.user_signup_credentials_dto.email,
+            password: user.user_signup_credentials_dto.password + '1',
         };
 
         return request( app.getHttpServer() )
@@ -122,23 +122,23 @@ describe( 'AuthController', () => {
     } );
 
     it( 'should enforce unique constraint on sigin properly', async () => {
-        const credentials = test_helper_service.get_unique_user_signin_credentials_dto();
+        const credentials = test_helper_service.get_unique_user_signup_credentials_dto();
 
         await request( app.getHttpServer() )
-            .post( '/signin' )
+            .post( '/signup' )
             .send( {
-                email: user.user_signin_credentials_dto.email,
+                email: user.user_signup_credentials_dto.email,
                 name: credentials.name,
                 password: credentials.password,
             } )
             .expect( 409 );
 
         return request( app.getHttpServer() )
-            .post( '/signin' )
+            .post( '/signup' )
             .send( {
                 email: credentials.email,
                 name: credentials.name,
-                password: user.user_signin_credentials_dto.password,
+                password: user.user_signup_credentials_dto.password,
             } )
             .expect( 201 )
             .expect( ( res ) => {

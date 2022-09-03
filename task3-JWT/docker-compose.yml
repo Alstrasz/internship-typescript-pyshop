@@ -20,6 +20,21 @@ services:
             - ./internship-typescript-pyshop-nest:/app
         command: bash -c "echo installing packages && npm install --prefix=/app && echo launching && npm run start:dev --prefix=/app"
 
+    quasar:
+        image: node:16
+        container_name: internship-typescript-pyshop-quasar
+        restart: "no"
+        logging:
+            options:
+                max-size: "50m"
+        environment:
+            - VUE_APP_API_URL=http://localhost:3000
+        ports:
+            - 4200:8080         
+        volumes:
+            - ./internship-typescript-pyshop-quasar:/app
+        command: bash -c "echo installing packages && npm install --prefix=/app --legacy-peer-deps && echo launching && npm run serve --prefix=/app"
+
     postgres:
         image: 'postgres:14.4'
         container_name: internship-typescript-pyshop-postgres

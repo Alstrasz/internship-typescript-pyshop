@@ -1,24 +1,23 @@
-# internship-typescript-pyshop-quasar
+# About
 
-## Project setup
-```
-npm install
-```
+Project containing JWT bearer auth and basic CRUD for User using rest api. It is client part.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): [not yet]
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Workflow:
+- User can login or signup using email and password
+- User can update his data(email, name, address, phone, about)
+- User can delete account
+- User can logout
 
-### Lints and fixes files
-```
-npm run lint
-```
+# Used technologies
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+- Vue
+- Quasar
+- Axios
+
+
+# How to run
+
+package.json pretty self explanatory

@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import * as request from 'supertest';
 import { TestHelperModule } from '../../helpers/test_helper/test_helper.module';
 import { TestHelperService } from '../../helpers/test_helper/test_helper.service';
-import { UserSigninCredentialsDto } from '../auth/dto/user_signin_credentials.dto';
+import { UserSignupCredentialsDto } from '../auth/dto/user_signup_credentials.dto';
 import { UserDto } from './dto/user.dto';
 import { UsersController } from './users.controller';
 import { UsersModule } from './users.module';
@@ -15,7 +15,7 @@ describe( 'UsersController', () => {
     let service: UsersService;
     let app: INestApplication;
     let user: {
-        user_signin_credentials_dto: UserSigninCredentialsDto;
+        user_signup_credentials_dto: UserSignupCredentialsDto;
         token: string;
     };
 
@@ -61,8 +61,8 @@ describe( 'UsersController', () => {
             .expect( 200 )
             .expect( ( res ) => {
                 const body: UserDto = res.body;
-                expect( body.email ).toEqual( user.user_signin_credentials_dto.email );
-                expect( body.name ).toEqual( user.user_signin_credentials_dto.name );
+                expect( body.email ).toEqual( user.user_signup_credentials_dto.email );
+                expect( body.name ).toEqual( user.user_signup_credentials_dto.name );
             } );
     } );
 
@@ -182,7 +182,7 @@ describe( 'UsersController', () => {
             .put( '/user' )
             .auth( user.token, { type: 'bearer' } )
             .send( {
-                email: data.user_signin_credentials_dto.email,
+                email: data.user_signup_credentials_dto.email,
             } )
             .expect( 409 );
     } );
@@ -193,7 +193,7 @@ describe( 'UsersController', () => {
             .auth( user.token, { type: 'bearer' } )
             .expect( 200 );
 
-        expect( await service.get_by_email( user.user_signin_credentials_dto.email ) ).toBeNull();
+        expect( await service.get_by_email( user.user_signup_credentials_dto.email ) ).toBeNull();
 
         return request( app.getHttpServer() )
             .get( '/user' )

@@ -35,14 +35,6 @@ axios.interceptors.response.use(
                 } )
                 router.push( '/signin' )
             }
-        } else {
-            Notify.create( {
-                message: 'Network error',
-                color: 'warning',
-                actions: [
-                    { label: 'Dismiss', color: 'white', handler: () => { /* ... */ } }
-                ]
-            } )
         }
         return Promise.reject( err )
     }

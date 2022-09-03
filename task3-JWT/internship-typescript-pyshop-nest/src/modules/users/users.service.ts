@@ -26,9 +26,9 @@ export class UsersService {
         } );
     }
 
-    async create_user ( user_signin_credentials_dto: CreateUserInterface ): Promise<User> {
+    async create_user ( user_signup_credentials_dto: CreateUserInterface ): Promise<User> {
         return this.prisma_service.user.create( {
-            data: user_signin_credentials_dto,
+            data: user_signup_credentials_dto,
         } )
             .catch( ( err ) => {
                 if ( err instanceof Prisma.PrismaClientKnownRequestError ) {

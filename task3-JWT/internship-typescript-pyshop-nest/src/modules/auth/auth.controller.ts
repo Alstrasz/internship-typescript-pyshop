@@ -6,7 +6,7 @@ import { RequestUser } from '../users/request_user.decorator';
 import { AuthService } from './auth.service';
 import { AccessTokenDto } from './dto/access_token.dto';
 import { UserLoginCredentialsDto } from './dto/user_login_credentials.dto';
-import { UserSigninCredentialsDto } from './dto/user_signin_credentials.dto';
+import { UserSignupCredentialsDto } from './dto/user_signup_credentials.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
 
@@ -28,11 +28,11 @@ export class AuthController {
     }
 
     @ApiOperation( { summary: 'Creates user by email/password pair and issues jwt token' } )
-    @Post( 'signin' )
+    @Post( 'signup' )
     @ApiCreatedResponse( { type: AccessTokenDto } )
     @ApiConflictResponse( { type: ConflictExceptionDto } )
-    async signin ( @Body() user_signin_credentials_dto: UserSigninCredentialsDto ) {
-        return new AccessTokenDto( await this.auth_service.signin( user_signin_credentials_dto ) );
+    async signup ( @Body() user_signup_credentials_dto: UserSignupCredentialsDto ) {
+        return new AccessTokenDto( await this.auth_service.signup( user_signup_credentials_dto ) );
     }
 
     @ApiOperation( {

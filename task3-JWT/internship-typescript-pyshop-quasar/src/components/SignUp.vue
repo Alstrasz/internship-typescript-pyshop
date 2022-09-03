@@ -27,6 +27,7 @@
             lazy-rules
             :rules="[
                 val => val && val.length > 0 || 'Should not be empty',
+                val => val.length <= 40 || 'Max length: 40 symbols',
             ]"
         />
 
@@ -72,7 +73,7 @@ const $q = useQuasar()
 function onSubmit () {
     axios( {
         method: 'POST',
-        url: '/signin',
+        url: '/signup',
         data: signup_credentials
     } )
         .then( ( res ) => {

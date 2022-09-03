@@ -5,7 +5,7 @@ Project containing JWT bearer auth and basic CRUD for User using rest api. It is
 Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): [not yet]
 
 Workflow:
-- User can login or signin using email and password
+- User can login or signup using email and password
 - User can update his data(email, name, address, phone, about)
 - User can delete account
 - User (kind of) can logout

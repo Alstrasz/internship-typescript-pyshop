@@ -6,7 +6,7 @@ import { lib as crypto_lib } from 'crypto-js';
 import { UserLoginCredentialsDto } from './dto/user_login_credentials.dto';
 import { User } from '@prisma/client';
 import { JwtPayload } from './interfaces/jwt_payload';
-import { UserSigninCredentialsDto } from './dto/user_signin_credentials.dto';
+import { UserSignupCredentialsDto } from './dto/user_signup_credentials.dto';
 import { CreateUserInterface } from '../users/interfaces/create_user_interface';
 
 @Injectable()
@@ -67,16 +67,16 @@ export class AuthService {
     /**
      * Creates user and issues JWT token
      *
-     * @param {UserSigninCredentialsDto} user_signin_credentials_dto
+     * @param {UserSignupCredentialsDto} user_signup_credentials_dto
      * @return {*}  {string}
      * @memberof AuthService
      */
-    async signin ( user_signin_credentials_dto: UserSigninCredentialsDto ): Promise<string> {
-        const { hash, salt } = this.create_hash_salt( user_signin_credentials_dto.password );
+    async signup ( user_signup_credentials_dto: UserSignupCredentialsDto ): Promise<string> {
+        const { hash, salt } = this.create_hash_salt( user_signup_credentials_dto.password );
 
         const user_data: CreateUserInterface = {
-            email: user_signin_credentials_dto.email,
-            name: user_signin_credentials_dto.name,
+            email: user_signup_credentials_dto.email,
+            name: user_signup_credentials_dto.name,
             password: hash,
             salt: salt,
         };

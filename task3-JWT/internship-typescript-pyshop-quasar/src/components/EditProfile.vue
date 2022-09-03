@@ -29,6 +29,7 @@
                 lazy-rules
                 :rules="[
                     val => val && val.length > 0 || 'Should not be empty',
+                    val => val.length <= 40 || 'Max length: 40 symbols',
                 ]"
             />
 
@@ -39,6 +40,10 @@
                 label-color="info"
                 color="white"
                 dark
+                lazy-rules
+                :rules="[
+                    val => val.length <= 128 || 'Max length: 128 symbols',
+                ]"
             />
 
             <q-input
@@ -48,6 +53,10 @@
                 label-color="info"
                 color="white"
                 dark
+                lazy-rules
+                :rules="[
+                    val => val.length <= 16 || 'Max length: 16 symbols',
+                ]"
             />
 
             <q-input
@@ -56,7 +65,12 @@
                 label="About me"
                 label-color="info"
                 color="white"
+                type="textarea"
                 dark
+                lazy-rules
+                :rules="[
+                    val => val.length <= 256 || 'Max length: 256 symbols',
+                ]"
             />
 
             <div>
