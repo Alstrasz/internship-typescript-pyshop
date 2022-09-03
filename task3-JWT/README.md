@@ -2,7 +2,9 @@
 
 Project containing JWT bearer auth and basic CRUD for User using rest api. Contains server and a client.
 
-Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): [not yet]
+Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): 
+- back: https://internship-typescript-pyshop-n.herokuapp.com/api
+- front: https://internship-typescript-pyshop-q.herokuapp.com/
 
 Workflow:
 - User can login or signup using email and password
@@ -52,7 +54,9 @@ Frontend available at localhost:4200
 
 No need
 
-Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): [not yet]
+Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): 
+- back: https://internship-typescript-pyshop-n.herokuapp.com/api
+- front: https://internship-typescript-pyshop-q.herokuapp.com/
 
 If you really want: either edit dev docker-compose file or install, build and run back and front. Althogh passing proper settings can be tedios
 

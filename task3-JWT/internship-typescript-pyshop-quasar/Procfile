@@ -1,0 +1,1 @@
+web: npm run start --prefix=task3-JWT/internship-typescript-pyshop-quasar

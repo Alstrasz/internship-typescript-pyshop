@@ -2,7 +2,8 @@
 
 Project containing JWT bearer auth and basic CRUD for User using rest api. It is client part.
 
-Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): [not yet]
+Project deployed on heroku (first access can be slow due to heroku storing containers in sleep mode): 
+- https://internship-typescript-pyshop-q.herokuapp.com/
 
 Workflow:
 - User can login or signup using email and password
