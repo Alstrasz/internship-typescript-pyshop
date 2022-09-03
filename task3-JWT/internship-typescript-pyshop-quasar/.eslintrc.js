@@ -28,7 +28,6 @@ module.exports = {
         'new-cap': 0,
         'no-unused-vars': 'off',
         'no-throw-literal': 'off',
-        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
         'require-jsdoc': ['error', {
             require: {
                 FunctionDeclaration: false,
@@ -45,6 +44,8 @@ module.exports = {
             closeBracket: 0,
             alignAttributesVertically: true,
             ignores: []
-        }]
+        }],
+        'prefer-regex-literals': 'off',
+        '@typescript-eslint/no-unused-vars': 'off'
     }
 }

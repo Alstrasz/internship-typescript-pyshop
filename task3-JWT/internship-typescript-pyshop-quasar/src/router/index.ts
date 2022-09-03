@@ -7,9 +7,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import( '../views/HomeView.vue' )
     },
     {
-        path: '/login',
-        name: 'login',
-        component: () => import( '../views/LoginView.vue' )
+        path: '/signin',
+        name: 'signin',
+        component: () => import( '../views/SignInView.vue' )
     },
     {
         path: '/edit',
@@ -17,9 +17,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import( '../views/EditProfileView.vue' )
     },
     {
-        path: '/signin',
-        name: 'signin',
-        component: () => import( '../views/SigninView.vue' )
+        path: '/signup',
+        name: 'signup',
+        component: () => import( '../views/SignUpView.vue' )
     }
 ]
 
